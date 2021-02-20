@@ -31,12 +31,37 @@ def sync_solution():
     sf.log(f'Total_time: {time.time() - t1}')
 
 
+async def foo(i):
+    p1, p2, p3 = await asyncio.gather(
+        process_input_1(i),
+        process_input_2(i),
+        process_input_3(i)
+    )
+    f = await final_process(p1, p2, p3)
+    asyncio.ensure_future(log(f'{i}: {f}'))
+
+
+async def my_solution():
+    t1 = time.time()
+    q = asyncio.create_task(log('Starting'))
+    tasks = []
+    async for i in input_queue():
+        tasks.append(asyncio.create_task(foo(i)))
+    await asyncio.gather(*tasks)
+    await log(f'Total_time: {time.time() - t1}')
+
+
+
 if __name__ == '__main__':
     # sync_solution()
+
+
     loop = asyncio.get_event_loop()
     try:
         loop.run_until_complete(my_solution())
     finally:
         loop.close()
+
     # asyncio.run(naive_solution())
-    # asyncio.run(my_solution())
+
+    asyncio.run(my_solution())

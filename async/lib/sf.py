@@ -28,7 +28,7 @@ def process_input_2(i: int) -> int:
 
 def process_input_3(i: int) -> int:
     time.sleep(1)
-    return int(math.sqrt(SLEEP_TIME))
+    return int(math.sqrt(i))
 
 
 def final_process(p1: int, p2: int, p3: int) -> int:
