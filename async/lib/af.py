@@ -1,3 +1,6 @@
+"""
+Асинхронный набор функций
+"""
 import asyncio
 import math
 from typing import AsyncIterable, Any
